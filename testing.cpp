@@ -1,7 +1,7 @@
 #include <iostream>
 #include "parsing.h"
 #include "mergeSort.h"
-#include "probability.h"
+#include "rolling.h"
 #include <string>
 #include <math.h>
 #include <time.h>
@@ -75,12 +75,15 @@ int main(){
 	int dicenum = 2;
 	int dicetype = 20;
 	int dropped = 1;
+	int addconst = 7;
+	int summedrolls = 0;
+	int addedconst = 0;
 	bool verbose = true;
 	int *rolls = new int[dicenum];
 	rolls = rollMult(dicenum,dicetype);
 	cout << "Rolled " << dicenum << "d" << dicetype << "dl" << dropped << ": ";
 	for(int i=0;i<dicenum;i++){
-		cout << *(rolls+i) << " ";
+		cout << *(rolls+i) << ". ";
 	}
 	cout << endl;
 	
@@ -92,5 +95,12 @@ int main(){
 	}
 	cout << endl;
 	
+	summedrolls = sumRolls(dicenum-dropped, droppedRolls);
+	cout << "Sum: " << summedrolls << endl;
+	
+	addedconst = addMods(summedrolls, addconst);
+	cout << "With mod: " << addedconst << endl;
+	
+	cout << endl;
 }
 
