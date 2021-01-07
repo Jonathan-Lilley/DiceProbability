@@ -32,31 +32,51 @@
 #include "mergeSort.h"
 #include <math.h>
 
+
 // Rolls a single die of type
 int rollOne(int type){
-	return ((rand()%1000)%type);
+	return ((rand()%1000)%type)+1;
 }
 
 // Gets the rolls of multiple dice
 int* rollMult(int num, int type){
-	int* allRolls[num];
+	int* allRolls = new int[num];
 	for(int i;i<num;i++){
-		*(allRolls+1) = rollOne(type);
+		*(allRolls+i) = rollOne(type);
 	}
 	return allRolls;
 }
 
 // Drops rolls
-int* dropRolls(int num, int *rolls, int droptype, int drops){
-	int* selectedRolls[num-drops];
-	mergeSort(rolls);
+int* dropRolls(int num, int *rolls, int droptype, int drops, bool verbose){
+	int* selectedRolls = new int[num-drops]; // Pointer for selected rolls from rolls
+	mergeSort(rolls,0,num-1); // sorts rolls
+	// Drops rolls from rolls; if h, go from front to back, if l, go from back to front
 	for(int i=0;i<num-drops;i++){
 		if(droptype == 'h'){
 			*(selectedRolls+i) = *(rolls+i);
 		}
 		else if(droptype == 'l'){
-			*(selectedRolls+num-i-1) = *(rolls+num-i-1);
+			*(selectedRolls+i) = *(rolls+num-i-1);
 		}
+	}
+	// Verbose: for explaining process if desired
+	if(verbose){
+		cout << "Keeping: ";
+		for(int i=0;i<num-drops;i++){
+			cout << *(selectedRolls+i) << " ";
+		}
+		cout << endl;
+		cout << "Dropped rolls: ";
+		for(int i=0;i<drops;i++){
+			if(droptype == 'h'){
+				cout << *(rolls+num-i-2) << " ";
+			}
+			else if(droptype == 'l'){
+				cout << *(rolls+i) << " ";
+			}
+		}		
+		cout << endl;
 	}
 	return selectedRolls;
 }

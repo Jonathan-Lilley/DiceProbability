@@ -1,8 +1,10 @@
 #include <iostream>
 #include "parsing.h"
 #include "mergeSort.h"
+#include "probability.h"
 #include <string>
 #include <math.h>
+#include <time.h>
 
 using namespace std;
 
@@ -68,7 +70,27 @@ int main(){
 		cout << (rand() % 100) << endl;
 	}
 	return 0;*/
+	 
+	srand(time(NULL)); // seeds random
+	int dicenum = 2;
+	int dicetype = 20;
+	int dropped = 1;
+	bool verbose = true;
+	int *rolls = new int[dicenum];
+	rolls = rollMult(dicenum,dicetype);
+	cout << "Rolled " << dicenum << "d" << dicetype << "dl" << dropped << ": ";
+	for(int i=0;i<dicenum;i++){
+		cout << *(rolls+i) << " ";
+	}
+	cout << endl;
 	
+	int *droppedRolls = new int[dicenum-dropped];
+	droppedRolls = dropRolls(dicenum,rolls,'l',dropped,verbose);
+	cout << "Dropping " << dropped << ": ";
+	for(int i=0;i<dicenum-dropped;i++){
+		cout << *(droppedRolls+i) << " ";
+	}
+	cout << endl;
 	
 }
 

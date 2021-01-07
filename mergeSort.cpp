@@ -2,6 +2,7 @@
 //#define MERGESORT_H
 
 #include <iostream>
+#include <time.h>
 
 using namespace std;	
 
@@ -90,8 +91,12 @@ void printArray(int *A, int size)
 // Driver code
 int main()
 {
-    int *arr = new int[6];
-	int a[6] = { 12, 11, 13, 5, 6, 7 };
+	srand(time(NULL));
+    int *arr = new int[20];
+	int a[20];
+	for(int i=0;i<20;i++){
+		a[i] = rand()%4+1;
+	}
 	/*for(int i=0;i<6;i++){
 		cout << a[i] << endl;
 	}*/	
@@ -105,6 +110,21 @@ int main()
  
     cout << "\nSorted array is \n";
     printArray(arr, arr_size);
+	cout << endl;
+	
+	bool sorted = true;
+	for(int i=0;i<19;i++){
+		if(*arr>*arr+i){
+			sorted = false;
+		}
+	}
+	cout << "sorted correctly: ";
+	if(sorted){
+		cout << "true" << endl;
+	}
+	else{
+		cout << "false" << endl;
+	}
     return 0;
 }
 

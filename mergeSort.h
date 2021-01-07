@@ -1,5 +1,5 @@
-//#ifndef MERGESORT_H
-//#define MERGESORT_H
+#ifndef MERGESORT_H
+#define MERGESORT_H
 
 #include <iostream>
 
@@ -87,26 +87,5 @@ void printArray(int *A, int size)
         cout << *(A+i) << " ";
 }
 
-// Driver code
-/*int main()
-{
-    int *arr = new int[6];
-	int a[6] = { 12, 11, 13, 5, 6, 7 };
-	for(int i=0;i<6;i++){
-		cout << a[i] << endl;
-	}
-	arr = a;
-    int arr_size = sizeof(a) / sizeof(a[0]);
- 
-    cout << "Given array is \n";
-    printArray(arr, arr_size);
- 
-    mergeSort(arr, 0, arr_size - 1);
- 
-    cout << "\nSorted array is \n";
-    printArray(arr, arr_size);
-    return 0;
-}*/
 
-
-// #endif
+#endif
