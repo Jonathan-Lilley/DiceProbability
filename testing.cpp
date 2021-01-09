@@ -12,14 +12,20 @@ int main(){
 	
 	// First test: Can it parse correctly?
 	
-	/*string dicerolls[9] = {"2d10","2d10dl1","2d10dh1","2d10+2","2d10-2","2d10<5","2d10=5","2d10>5","2d10dl1+5=3"};
+	string dicerolls[10] = {"d10","2d10","2d10dl1","2d10dh1","2d10+2","2d10-2","2d10<5","2d10=5","2d10>5","2d10dl1+5=3"};
 	
 	dicecode code;
 	
-	for(int i=0;i<9;i++){
+	for(int i=0;i<10;i++){
 		cout << dicerolls[i] << endl;
 		code = parseEntry(dicerolls[i]);
-		cout << "Dice num: " << code.num << endl;
+		if(code.multiple){
+			cout << "Multiple dice" << endl;
+			cout << "Dice num: " << code.num << endl;
+		}
+		else{
+			cout << "One die" << endl;
+		}
 		cout << "Die type: " << code.type << endl;
 		cout << "Drop any?: ";
 		if(code.drop){
@@ -46,7 +52,7 @@ int main(){
 			cout << "no" << endl;
 		}
 		cout << "Success!\n\n" << endl;
-	}*/
+	}
 	
 	// test mergesort
 	/*int *arr = new int[5];
@@ -64,20 +70,21 @@ int main(){
 	}
 	cout << endl;*/
 	
-	// Second test: Probability functions
-	
 	/*for(int i=1;i<10;i++){
 		cout << (rand() % 100) << endl;
 	}
 	return 0;*/
 	 
-	srand(time(NULL)); // seeds random
+	// Second test: roll functions
+	/*srand(time(NULL)); // seeds random
 	int dicenum = 2;
-	int dicetype = 20;
+	int dicetype = 4;
 	int dropped = 1;
-	int addconst = 7;
+	int addconst = 0;
 	int summedrolls = 0;
 	int addedconst = 0;
+	char compare = '>';
+	int comparenum = 5;
 	bool verbose = true;
 	int *rolls = new int[dicenum];
 	rolls = rollMult(dicenum,dicetype);
@@ -101,6 +108,19 @@ int main(){
 	addedconst = addMods(summedrolls, addconst);
 	cout << "With mod: " << addedconst << endl;
 	
-	cout << endl;
+	bool bigger = false;
+	bigger = compareRoll(addedconst,compare,comparenum);
+	if(bigger){
+		cout << addedconst << compare << comparenum;
+	}
+	else{
+		cout << comparenum << compare << addedconst;
+	}
+	
+	cout << endl;*/
+	
+	// Third test: probability equations
+	
+	
 }
 

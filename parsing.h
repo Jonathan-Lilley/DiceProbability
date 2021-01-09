@@ -3,7 +3,7 @@
 
 /* Parsing file
  * 
- * This file contains the main calculation functions
+ * This file contains the main parsing functions
  * It includes:
  * - string to int functions (two part function)
  * - parse dice notation (return parsed data in a struct)
@@ -31,16 +31,17 @@ using namespace std;
 
 // A struct to record the data from a parsed dicecode
 typedef struct dicecode {
-	int num = -1; // number of dice
-	int type = -1; // type of die
+	bool multiple = false; // if multiple dice
+	int num = 0; // number of dice
+	int type = 0; // type of die
 	bool drop = false; // drop any?
 	char droplh = '0'; // high or low
-	int dropnum = -1; // how many drop?
+	int dropnum = 0; // how many drop?
 	bool addsub = false; // add or sub a constant?
-	int c = -1; // constant to add 
+	int c = 0; // constant to add 
 	bool compare = false; // compare to a value?
 	char compareop = '0'; // what kind of comparison?
-	int comparenum = -1; // what number to compare to?
+	int comparenum = 0; // what number to compare to?
 } dicecode;
 
 // Get an integer from a string
@@ -62,8 +63,8 @@ int stringToInt(string intString){
 	return parsed;
 }
 
-// Checks if number is between 0 and 9
-bool checkRange(int inp){
+// Checks if number is between 0 and 9; aka is integer
+bool checkInt(int inp){
 	if(inp-'0' >= 0 && inp-'0' <= 9){
 		return true;
 	}
@@ -77,7 +78,7 @@ int getStringNum(int *counter, string stringNum){
 	cout << "counter " << *counter << endl;*/
 	string number;
 	while(*counter < stringNum.length()){
-		if(checkRange(stringNum[*counter])){
+		if(checkInt(stringNum[*counter])){
 			number += stringNum[*counter];
 			*counter+=1;
 		}
@@ -101,8 +102,11 @@ dicecode parseEntry(string codeString){
 	
 	// Dice number and type block; variables here: dicecode.num, dicecode.type
 	// grab number of dice
-	int a = getStringNum(&counter, codeString);
-	entry.num = a; // This should get to ether 'd' or end of string
+	if(checkInt(codeString[0])){
+		entry.multiple = true;
+		int a = getStringNum(&counter, codeString);
+		entry.num = a; // This should get to ether 'd' or end of string
+	}
 	// checks for end of string
 	// If 'd' is the end of string or it hit the end of the string, return an error and entry
 	// counter++ moves on from 'd', as its just a parsing point; if it hits the end of string, it means it didnt have
