@@ -1,3 +1,5 @@
+# Current version: does drop highest
+
 from triangles import  pascalsTriangleFull
 from random import randint
 
